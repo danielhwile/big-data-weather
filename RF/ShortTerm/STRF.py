@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.neural_network import MLPRegressor
+from sklearn.ensemble import RandomForestRegressor
 df = pd.read_csv(r'raw data/daily/combined/combined.csv')
 X = pd.DataFrame()
 for i in range(1,len(df)):
@@ -50,6 +50,6 @@ x_train = X.iloc[:1063,:]
 x_test = X.iloc[1063:,:]
 y_train = Y.iloc[:1063]
 y_test = Y.iloc[1063:]
-regr = MLPRegressor(random_state=1, hidden_layer_sizes=1000, learning_rate='adaptive', activation='tanh', max_iter=1000, solver='sgd').fit(x_train, y_train)
+regr = RandomForestRegressor(max_depth=10, random_state=0)
+regr.fit(x_train, y_train)
 print(regr.score(x_test, y_test))
-
